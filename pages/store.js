@@ -12,14 +12,18 @@ export default function Store() {
 
       <Navbar/>
 
-      <main>
-        <h1>Explorers by Nature</h1>
+      <main className="alertBanner">
+        <h1>*Store Page Under Construction*</h1>
+        <p>Stand by for Explorers by Nature Merchandise!</p>
       </main>
 
       <Footer/>
 
       <style jsx>{`
-        asd
+        .alertBanner {
+          text-align: center;
+          margin: 50px auto;
+        }
       `}</style>
 
       <style jsx global>{`

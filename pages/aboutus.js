@@ -12,14 +12,73 @@ export default function AboutUs() {
 
       <Navbar/>
 
-      <main>
-        <h1>Explorers by Nature</h1>
+      <main className="aboutUsGrid">
+        <div className="chanDiv">
+          <h1>Chandler</h1>
+          <p>
+            Chandler is a highly motivated, truly dedicated Bravo midshipman, sir.
+          </p>
+        </div>
+
+        <div className="nicoleDiv">
+          <h1>Nicole</h1>
+          <p>
+            Nicole is also a highly motivated, truly dedicatd Bravo midshipman, sir.
+          </p>
+        </div>
+
+        <div className="kimDiv">
+          <h1>Kimberly</h1>
+          <p>
+            Kimberly loves to craft and, uh, sleep?
+          </p>
+        </div>
+
+        <div className="nicDiv">
+          <h1>Nicolas</h1>
+          <p>
+            Nicolas, or Nic (yup, no 'k'!) for short, loves computers and motorcycles!
+          </p>
+        </div>
       </main>
 
       <Footer/>
 
       <style jsx>{`
-        asd
+        .container {
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+        }
+        
+        .aboutUsGrid {
+          display: grid;
+          grid-template-columns: auto auto;
+          flex: 1;
+        }
+
+        .chanDiv, .nicoleDiv, .kimDiv, .nicDiv {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .chanDiv {
+
+        }
+
+        .nicoleDiv {
+
+        }
+
+        .kimDiv {
+
+        }
+
+        .nicDiv {
+
+        }
       `}</style>
 
       <style jsx global>{`

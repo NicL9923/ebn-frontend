@@ -13,14 +13,23 @@ export default function ContactUs() {
 
       <Navbar/>
 
-      <main>
+      <main className="cFormDiv">
         <ContactForm/>
       </main>
 
       <Footer/>
 
       <style jsx>{`
-        asd
+        .container {
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .cFormDiv {
+          text-align: center;
+          flex: 1;
+        }
       `}</style>
 
       <style jsx global>{`
