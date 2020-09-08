@@ -13,13 +13,58 @@ export default function Blog() {
       <Navbar/>
 
       <main>
-        <h1>Explorers by Nature</h1>
+        <div className="topPostBar">
+          <div className="postOfTheMonth">
+            <h3>Post of the Month</h3>
+
+            <h4>*Blog title*</h4>
+            <p>*Author*</p>
+            <p>*Date*</p>
+            <p>*First few lines of blog (blurred)...*</p>
+          </div>
+
+          <div>
+            <h3>Most Recent</h3>
+
+            <h4>*Blog title*</h4>
+            <p>*Author*</p>
+            <p>*Date*</p>
+            <p>*First few lines of blog (blurred)...*</p>
+          </div>
+        </div>
+
+        <div className="latestPostsDiv">
+          <h3>Latest Posts</h3>
+
+          <div>
+            <div>
+              <h4>*TODO: create blog post preview component with format above to be reused here(maybe?)*</h4>
+            </div>
+
+            <div>
+              *the next post in the queue and so on...*
+            </div>
+          </div>
+        </div>
       </main>
 
       <Footer/>
 
       <style jsx>{`
-        asd
+        .topPostBar {
+          display: grid;
+          grid-template-columns: auto auto;
+          margin: 30px 0;
+        }
+
+        .postOfTheMonth {
+          border-right: 3px solid #212121;
+        }
+
+        .latestPostsDiv {
+          text-align: center;
+          margin: 30px 0;
+        }
       `}</style>
 
       <style jsx global>{`
