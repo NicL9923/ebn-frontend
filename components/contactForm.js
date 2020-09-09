@@ -1,13 +1,43 @@
 import React from 'react';
+const fetch = require('node-fetch');
 
 class ContactForm extends React.Component {
-    SubmitContactForm = () => {
+    constructor() {
+        super();
+        this.state = {
+            subject: "",
+            email: "",
+            message: ""
+        }
+    }
+    
+    handleInputChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
+        e.preventDefault();
+    }
 
+    submitContactForm = e => {
+        let body = {
+            subject: this.state.subject,
+            email: this.state.email,
+            message: this.state.message,
+            datecreated: new Date()
+        }
+        
+        fetch('/api/contactmessage', {
+            method: 'post',
+            body:    JSON.stringify(body),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => res.text())
+        .then(body => console.log(body));
+
+        e.preventDefault();
     }
 
     render() {
         return(
-            <form className="contactForm" method="POST" onSubmit={this.SubmitContactForm}>
+            <form className="contactForm" method="POST" onSubmit={this.submitContactForm}>
                 <div>
                     <h1 className="cFormHdr">Contact Us</h1>
                     <p className="cFormSubHdr">
@@ -18,19 +48,19 @@ class ContactForm extends React.Component {
 
                 <div className="subjEmailContainer">
                     <div>
-                        <label for="subject" className="formLabel">Subject</label>
-                        <input type="text" className="textInput" name="subject" placeholder="Subject" required/>
+                        <label htmlFor="subject" className="formLabel">Subject</label>
+                        <input type="text" className="textInput" name="subject" value={this.state.subject} onChange={this.handleInputChange} placeholder="Subject" required autoFocus/>
                     </div>
 
                     <div>
-                        <label for="email" className="formLabel">Email</label>
-                        <input type="text" className="textInput" name="email" placeholder="Email (Optional)"/>
+                        <label htmlFor="email" className="formLabel">Email</label>
+                        <input type="email" className="textInput" name="email" value={this.state.email} onChange={this.handleInputChange} placeholder="Email (Optional)"/>
                     </div>
                 </div>
 
                 <div>
-                    <label for="message" className="formLabel">Message</label>
-                    <textarea  className="msgInput" name="message" placeholder="Message" required/>
+                    <label htmlFor="message" className="formLabel">Message</label>
+                    <textarea  className="msgInput" name="message" value={this.state.message} onChange={this.handleInputChange} placeholder="Message" required/>
                 </div>
 
                 <input type="submit" className="submitBn" value="Send"/>

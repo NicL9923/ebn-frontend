@@ -13,25 +13,26 @@ const pool = new Pool({
 
 
 //Create blog post
-const createBlogPost = (request, response) => {
+const createBlogPost = request => {
   let rb = request.body;
   
   let queryText = 'INSERT INTO blogposts VALUES ($1, $2, $3, $4, $5)';
   let queryValues = [rb.title, rb.author, rb.datecreated, rb.pathtobodyfile, rb.pathtoimagefile];
 
   //TODO: Create/store body text and image files here
+  let result;
 
   pool.query(queryText, queryValues, (error, results) => {
     if (error) {
       throw error;
     }
 
-    response.status(200).json(results.rows);
+    result = results.rows;
   });
 }
 
 //Create podcast
-const createPodcast = (request, response) => {
+const createPodcast = request => {
   let rb = request.body;
   
   let queryText = 'INSERT INTO podcasts VALUES ($1, $2, $3)';
@@ -43,80 +44,79 @@ const createPodcast = (request, response) => {
     if (error) {
       throw error;
     }
-
-    response.status(200).json(results.rows);
   });
 }
 
 //Create contact message
-const createContactMsg = (request, response) => {
+const createContactMsg = request => {
   let rb = request.body;
   
   let queryText = 'INSERT INTO contactmessages(subject, email, message, datecreated) VALUES ($1, $2, $3, $4)';
   let queryValues = [rb.subject, rb.email, rb.message, rb.datecreated];
 
-  pool.query(queryText, queryValues, (error, results) => {
+  pool.query(queryText, queryValues, error => {
     if (error) {
       throw error;
     }
-
-    response.status(200).json(results.rows);
   });
 }
 
 //Get blog post
-const getBlogPost = (request, response) => {
+const getBlogPost = request => {
   let rb = request.body;
   
   //TODO: Add parameters (date range, etc.)
   let queryText = 'SELECT * from blogposts';
   //let queryValues = [rb.datecreated];
+  let result;
 
   pool.query(queryText, queryValues, (error, results) => {
     if (error) {
       throw error;
     }
 
-    response.status(200).json(results.rows);
+    result = results.rows;
   });
 }
 
 //Get podcast
-const getPodcast = (request, response) => {
+const getPodcast = request => {
   let rb = request.body;
   
   //TODO: Add parameters (date range, etc.)
   let queryText = 'SELECT * from podcasts';
   //let queryValues = [rb.datecreated];
+  let result;
 
   pool.query(queryText, queryValues, (error, results) => {
     if (error) {
       throw error;
     }
 
-    response.status(200).json(results.rows);
+    result = results.rows;
   });
 }
 
 //Get contact message
-const getContactMsg = (request, response) => {
+const getContactMsg = request => {
   let rb = request.body;
   
   //TODO: Add parameters (date range, etc.)
   let queryText = 'SELECT * from contactmessages';
   //let queryValues = [rb.datecreated];
+  let result;
 
   pool.query(queryText, queryValues, (error, results) => {
     if (error) {
       throw error;
     }
 
-    response.status(200).json(results.rows);
+    result = results.rows;
   });
 }
 
-//Update blog post **TODO**
-const updateBlogPost = (request, response) => {
+//Update blog post
+const updateBlogPost = request => {
   let rb = request.body;
   
   //TODO: Make query and add necessary parameters (do by ID or?)
@@ -127,13 +127,11 @@ const updateBlogPost = (request, response) => {
     if (error) {
       throw error;
     }
-
-    response.status(200).json(results.rows);
   });
 }
 
 //Delete blog post
-const deleteBlogPost = (request, response) => {
+const deleteBlogPost = request => {
   let rb = request.body;
   
   //TODO: Verify parameter usage/functionality
@@ -144,13 +142,11 @@ const deleteBlogPost = (request, response) => {
     if (error) {
       throw error;
     }
-
-    response.status(200).json(results.rows);
   });
 }
 
 //Delete podcast
-const deletePodcast = (request, response) => {
+const deletePodcast = request => {
   let rb = request.body;
   
   //TODO: Verify parameter usage/functionality
@@ -161,13 +157,11 @@ const deletePodcast = (request, response) => {
     if (error) {
       throw error;
     }
-
-    response.status(200).json(results.rows);
   });
 }
 
 //Delete contact message
-const deleteContactMsg = (request, response) => {
+const deleteContactMsg = request => {
   let rb = request.body;
   
   //TODO: Verify parameter usage/functionality
@@ -178,8 +172,6 @@ const deleteContactMsg = (request, response) => {
     if (error) {
       throw error;
     }
-
-    response.status(200).json(results.rows);
   });
 }
 

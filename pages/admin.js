@@ -1,4 +1,9 @@
 import Head from 'next/head';
+import Navbar from '../components/navbar';
+import Footer from '../components/footer';
+
+//TODO: Authentication/Authorization
+//TODO: Display blog posts only to current user (if user === admin (general admin account), can see all)
 
 export default function Admin() {
   return (
@@ -8,44 +13,43 @@ export default function Admin() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Navbar/>
+
       <main>
-        <h1>Explorers by Nature</h1>
+        <div>
+          <h1>Admin Portal</h1>
+          <h2>Welcome *name*!</h2>
+        </div>
+
+        <div className="adminBlog">
+          <h3>Your Blog Posts</h3>
+          <p>Create new, edit existing, or delete</p>
+        </div>
+
+        <div className="adminPodcasts">
+          <h3>Podcasts</h3>
+          <p>Upload new, or delete</p>
+        </div>
+
+        <div className="adminContactMsgs">
+          <h3>Messages</h3>
+          <p>View, or delete, contact messages</p>
+        </div>
       </main>
 
-      <footer>
-        <span>Copyright © 2020 Nicolas Layne</span>
-      </footer>
+      <Footer/>
 
       <style jsx>{`
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
-          }
-        }
+        asd
       `}</style>
 
       <style jsx global>{`
-        html,
-        body {
+        * {
           padding: 0;
           margin: 0;
           font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
             Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
             sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
         }
       `}</style>
     </div>
