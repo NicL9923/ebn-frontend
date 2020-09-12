@@ -16,7 +16,9 @@
     "node-fetch": "^2.6.1",
     "pg": "^8.3.3",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-markdown": "^4.3.1",
+    "react-mde": "^11.0.0"
   },
   "devDependencies": {
     "@zeit/next-css": "^1.0.1"
