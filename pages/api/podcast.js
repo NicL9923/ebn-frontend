@@ -4,6 +4,7 @@ const db = require('../../components/queries');
 export default (request, response) => {
     switch (request.method) {
         case 'POST':
+            //TODO: Store audio file in specified place, and pass path to DB query for storage
             db.createPodcast(request);
             break;
 

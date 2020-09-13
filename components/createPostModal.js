@@ -8,15 +8,37 @@ class CreatePostModal extends React.Component {
     constructor() {
         super();
         this.state = {
+            title: "",
+            author: "",
             bodyText: "",
             bodyTextEditorTab: "write"
         }
+        this.fileInput = React.createRef();
     }
     
     submitBlogPost = e => {
         e.preventDefault();
 
-        //Insert API 'POST' call here (include state data, and add 'new Date()' for 'datecreated')
+        //TODO: Handle/include optional file input
+            //this.fileInput.current.files[0].name
+        let body = {
+            title: this.state.title,
+            author: this.state.author,
+            bodyText: this.state.bodyText,
+            datecreated: new Date()
+        };
+        
+        fetch('/api/blogpost', {
+            method: 'post',
+            body:    JSON.stringify(body),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(res => res.text())
+        .then(body => console.log(body));
+    }
+
+    handleInputChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     render() {
@@ -26,13 +48,13 @@ class CreatePostModal extends React.Component {
                     <h3>Create Blog Post</h3>
 
                     <p>Title</p>
-                    <input type="text" name="title" required/>
+                    <input type="text" name="title" value={this.state.title} onChange={this.handleInputChange} required/>
 
                     <p>Author</p>
-                    <input type="text" name="author" required/>
+                    <input type="text" name="author" value={this.state.author} onChange={this.handleInputChange} required/>
 
                     <p>Optional: Header Image</p>
-                    <input type="file" name="image"/>
+                    <input type="file" name="image" ref={this.fileInput} accept=".jpg, .jpeg, .png"/>
 
 
                     <ReactMde

@@ -5,6 +5,7 @@ const db = require('../../components/queries');
 export default (request, response) => {
     switch (request.method) {
         case 'POST':
+            //TODO: Store image in proper place if passed, and pass path on to DB query for storage
             db.createBlogPost(request);
             response.status(200).end("API - Successfully created blog post!");
             break;

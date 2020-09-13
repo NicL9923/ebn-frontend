@@ -22,7 +22,7 @@ class ContactForm extends React.Component {
             email: this.state.email,
             message: this.state.message,
             datecreated: new Date()
-        }
+        };
         
         fetch('/api/contactmessage', {
             method: 'post',

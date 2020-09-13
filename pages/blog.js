@@ -4,6 +4,28 @@ import Footer from '../components/footer';
 import BlogpostPreview from '../components/blogpostPreview';
 
 class Blog extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+
+    }
+  }
+  
+  componentDidMount() {
+    //TODO: Fetch and store blog posts
+    let body = {
+      title: this.state.title
+    };
+    
+    fetch('/api/blogpost', {
+      method: 'get',
+      body:    JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.text())
+    .then(body => console.log(body));
+  }
+
   render() {
     return (
       <div className="container">

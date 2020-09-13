@@ -4,6 +4,28 @@ import Footer from '../components/footer';
 import PodcastBlock from '../components/podcastBlock';
 
 class Podcast extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+
+    }
+  }
+
+  componentDidMount() {
+    //TODO: Fetch and store podcasts
+    let body = {
+      title: this.state.title
+    };
+    
+    fetch('/api/podcast', {
+      method: 'get',
+      body:    JSON.stringify(body),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.text())
+    .then(body => console.log(body));
+  }
+  
   render() {
     return (
       <div className="container">

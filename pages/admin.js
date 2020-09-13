@@ -2,7 +2,6 @@ import Head from 'next/head';
 import Navbar from '../components/navbar';
 import Footer from '../components/footer';
 
-//TODO: Authentication/Authorization
 //TODO: Display blog posts only to current user (if user === admin (general admin account), can see all)
 import CreatePostModal from '../components/createPostModal';
 import CreatePodcastModal from '../components/createPodcastModal';
@@ -14,6 +13,11 @@ class Admin extends React.Component {
       isCreatingNewPost: false,
       isCreatingNewPodcast: false
     }
+  }
+
+  componentDidMount() {
+    //TODO: Authentication/Authorization
+    //Fetch blog posts, podcasts, etc.
   }
   
   render() {
