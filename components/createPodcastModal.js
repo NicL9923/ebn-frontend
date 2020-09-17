@@ -16,11 +16,11 @@ class CreatePodcastModal extends React.Component {
         let formData = new FormData();
             
         formData.append('title', this.state.title);
-        formData.append('datecreated', new Date());
+        formData.append('dateCreated', new Date());
         formData.append('audioFile', this.fileInput.current.files[0]);
 
-        fetch('/api/podcast', {
-            method: 'post',
+        fetch('/api/podcasts/create', {
+            method: 'POST',
             body: formData
         })
         .then(res => res.text())

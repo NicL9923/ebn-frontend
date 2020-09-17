@@ -21,11 +21,11 @@ class ContactForm extends React.Component {
             subject: this.state.subject,
             email: this.state.email,
             message: this.state.message,
-            datecreated: new Date()
+            dateCreated: new Date()
         };
         
-        fetch('/api/contactmessage', {
-            method: 'post',
+        fetch('/api/contactmessages/create', {
+            method: 'POST',
             body:    JSON.stringify(body),
             headers: { 'Content-Type': 'application/json' }
         })

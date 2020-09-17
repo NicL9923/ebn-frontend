@@ -17,7 +17,7 @@ const createBlogPost = (request, bodyTextPath, headerImagePath = null) => {
   let rb = request.body;
   
   let queryText = 'INSERT INTO blogposts VALUES ($1, $2, $3, $4, $5)';
-  let queryValues = [rb.title, rb.author, rb.datecreated, bodyTextPath, headerImagePath];
+  let queryValues = [rb.title, rb.author, rb.dateCreated, bodyTextPath, headerImagePath];
 
   let result;
 
@@ -51,7 +51,7 @@ const createContactMsg = request => {
   let rb = request.body;
   
   let queryText = 'INSERT INTO contactmessages(subject, email, message, datecreated) VALUES ($1, $2, $3, $4)';
-  let queryValues = [rb.subject, rb.email, rb.message, rb.datecreated];
+  let queryValues = [rb.subject, rb.email, rb.message, rb.dateCreated];
 
   pool.query(queryText, queryValues, error => {
     if (error) {

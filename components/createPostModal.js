@@ -23,11 +23,11 @@ class CreatePostModal extends React.Component {
             title: this.state.title,
             author: this.state.author,
             bodyText: this.state.bodyText,
-            datecreated: new Date()
+            dateCreated: new Date()
         };
         
-        fetch('/api/blogpost', {
-            method: 'post',
+        fetch('/api/blogposts/create', {
+            method: 'POST',
             body: JSON.stringify(body),
             headers: { 'Content-Type': 'application/json' }
         })
