@@ -11,6 +11,7 @@ class Blog extends React.Component {
     }
   }
   
+  //TODO: figure out how to pass in URL parameters...may need to separate endpoints as well...
   componentDidMount() {
     //TODO: Fetch and store blog posts
     fetch('/api/blogpost', {

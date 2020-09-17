@@ -15,12 +15,10 @@ class CreatePostModal extends React.Component {
         }
         this.fileInput = React.createRef();
     }
-    
+
     submitBlogPost = e => {
         e.preventDefault();
 
-        //TODO: handle (optional) image input
-        //this.fileInput.current.files[0]
         let body = {
             title: this.state.title,
             author: this.state.author,
@@ -30,7 +28,7 @@ class CreatePostModal extends React.Component {
         
         fetch('/api/blogpost', {
             method: 'post',
-            body:    JSON.stringify(body),
+            body: JSON.stringify(body),
             headers: { 'Content-Type': 'application/json' }
         })
         .then(res => res.text())
@@ -53,8 +51,8 @@ class CreatePostModal extends React.Component {
                     <p>Author</p>
                     <input type="text" name="author" value={this.state.author} onChange={this.handleInputChange} required/>
 
-                    <p>Optional: Header Image</p>
-                    <input type="file" name="image" ref={this.fileInput} accept=".jpg, .jpeg, .png"/>
+                    {/*<p>Optional: Header Image</p>*/}
+                    {/*<input type="file" name="image" ref={this.fileInput} accept=".jpg, .jpeg, .png"/>*/}
 
 
                     <ReactMde

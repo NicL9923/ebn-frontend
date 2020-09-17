@@ -31,18 +31,18 @@ const createBlogPost = (request, bodyTextPath, headerImagePath = null) => {
 }
 
 //Create podcast
-const createPodcast = request => {
-  let rb = request.body;
-  
+const createPodcast = (title, dateCreated, audioFilePath) => {
   let queryText = 'INSERT INTO podcasts VALUES ($1, $2, $3)';
-  let queryValues = [rb.title, rb.datecreated, rb.pathtoaudiofile];
+  let queryValues = [title, new Date(dateCreated), audioFilePath];
 
-  //TODO: Create/store audio file here
+  let result;
 
   pool.query(queryText, queryValues, (error, results) => {
     if (error) {
       throw error;
     }
+
+    result = results.rows;
   });
 }
 

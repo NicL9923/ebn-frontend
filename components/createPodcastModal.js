@@ -13,16 +13,15 @@ class CreatePodcastModal extends React.Component {
     submitPodcast = e => {
         e.preventDefault();
 
-        //TODO: Handle file input
-        let body = {
-            title: this.state.title,
-            datecreated: new Date()
-        };
-        
+        let formData = new FormData();
+            
+        formData.append('title', this.state.title);
+        formData.append('datecreated', new Date());
+        formData.append('audioFile', this.fileInput.current.files[0]);
+
         fetch('/api/podcast', {
             method: 'post',
-            body:    JSON.stringify(body),
-            headers: { 'Content-Type': 'application/json' }
+            body: formData
         })
         .then(res => res.text())
         .then(body => console.log(body));
