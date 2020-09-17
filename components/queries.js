@@ -13,13 +13,12 @@ const pool = new Pool({
 
 
 //Create blog post
-const createBlogPost = request => {
+const createBlogPost = (request, bodyTextPath, headerImagePath = null) => {
   let rb = request.body;
   
   let queryText = 'INSERT INTO blogposts VALUES ($1, $2, $3, $4, $5)';
-  let queryValues = [rb.title, rb.author, rb.datecreated, rb.pathtobodyfile, rb.pathtoimagefile];
+  let queryValues = [rb.title, rb.author, rb.datecreated, bodyTextPath, headerImagePath];
 
-  //TODO: Create/store body text and image files here
   let result;
 
   pool.query(queryText, queryValues, (error, results) => {

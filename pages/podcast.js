@@ -13,13 +13,8 @@ class Podcast extends React.Component {
 
   componentDidMount() {
     //TODO: Fetch and store podcasts
-    let body = {
-      title: this.state.title
-    };
-    
     fetch('/api/podcast', {
       method: 'get',
-      body:    JSON.stringify(body),
       headers: { 'Content-Type': 'application/json' }
     })
     .then(res => res.text())

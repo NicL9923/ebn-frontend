@@ -19,8 +19,8 @@ class CreatePostModal extends React.Component {
     submitBlogPost = e => {
         e.preventDefault();
 
-        //TODO: Handle/include optional file input
-            //this.fileInput.current.files[0].name
+        //TODO: handle (optional) image input
+        //this.fileInput.current.files[0]
         let body = {
             title: this.state.title,
             author: this.state.author,

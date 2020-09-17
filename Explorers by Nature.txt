@@ -1,0 +1,43 @@
+Name: Explorers by Nature
+Motto: Mankind was born to stay curious and wander.
+Podcast Title: Life's Next Journey Ep.1
+Logo/Site Icon: *Completed*
+Domain: explorersbynature.com
+
+
+General------------------------------------------
+-Figure out needs of site
+	-Home
+	-Blog
+	-Podcasts
+	-Store (Merch) -> Stripe/Custom cart/payment system
+	-About Us
+		-Timeline -> interesting interactive timeline that, on hover, shows a picture/desc/title/time of one of all of our major events (black BG, white timeline?)
+		-Each person has individualized page (really creative looking)
+	-Contact Us
+
+	-Admin page
+-Biweekly newsletter?
+-SSL certificate (Free one; for HTTPS)
+-Hook up domain name and hosting
+-Do we want a forum?
+
+-CI/CD (make dev/build/deployment pipeline)
+	-Maybe containerize everything (docker)
+
+
+
+
+
+Frontend----------------------------------------
+ReactJS, Next.js (SSR)
+
+
+Backend--------------------------------------------
+Next.js backend/API built-in functionality
+PostgresSQL
+
+-Figure out hosting
+-Passport.js for AUTHENTICATION if ever needed
+
+-Setup CI/CD pipeline (GitHub Actions (Free for public repos))

@@ -1,4 +1,5 @@
 import React from 'react';
+//TODO: render markdown using react-markdown
 
 class BlogpostPreview extends React.Component {
     render() {

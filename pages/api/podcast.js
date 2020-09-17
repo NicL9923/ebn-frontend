@@ -1,5 +1,6 @@
 // Podcasts endpoint - /api/podcast
 const db = require('../../components/queries');
+const fs = require('fs');
 
 export default (request, response) => {
     switch (request.method) {
