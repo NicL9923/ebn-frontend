@@ -7,7 +7,8 @@ class Podcast extends React.Component {
   constructor() {
     super();
     this.state = {
-
+      podcasts: [],
+      latestPodcast: null
     }
   }
 
@@ -17,11 +18,17 @@ class Podcast extends React.Component {
 
   getPodcasts = () => {
     fetch('/api/podcasts/get', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      method: 'GET'
     })
-    .then(res => res.text())
-    .then(body => console.log(body));
+    .then(res => res.json())
+    .then(body => {
+      this.setState({ podcasts: body });
+      this.setLatestPodcast();
+    });
+  }
+
+  setLatestPodcast = () => {
+    this.setState({ latestPodcast: this.state.podcasts[0], podcasts: this.state.podcasts.slice(1) });
   }
   
   render() {
@@ -41,7 +48,9 @@ class Podcast extends React.Component {
             <div>
               <h3>Our Latest Podcast</h3>
   
-              <PodcastBlock/>
+              {this.state.latestPodcast && 
+                <PodcastBlock title={this.state.latestPodcast.title} dateCreated={this.state.latestPodcast.datecreated} autoLoadAudio/>
+              }
             </div>
           </div>
   
@@ -51,9 +60,9 @@ class Podcast extends React.Component {
             <h3>Previous Podcasts</h3>
   
             <div>
-              <PodcastBlock/>
-              <PodcastBlock/>
-              <PodcastBlock/>
+              {this.state.podcasts.map(podcast => 
+                <PodcastBlock key={podcast.id} title={podcast.title} dateCreated={podcast.datecreated}/>
+              )}
             </div>
           </div>
         </main>

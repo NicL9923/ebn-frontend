@@ -63,8 +63,7 @@ const createContactMsg = request => {
 //Get blog post
 const getBlogPost = queryParams => {
   return new Promise((resolve, reject) => {
-    let queryText;
-    let queryValues;
+    let queryText, queryValues;
 
     if (queryParams.id) {
       //Return a single post by ID
@@ -91,38 +90,60 @@ const getBlogPost = queryParams => {
 }
 
 //Get podcast
-const getPodcast = request => {
-  let rb = request.body;
-  
-  //TODO: Add parameters (date range, etc.)
-  let queryText = 'SELECT * from podcasts';
-  //let queryValues = [rb.datecreated];
-  let result;
+const getPodcast = queryParams => {
+  return new Promise((resolve, reject) => {
+    let queryText, queryValues;
 
-  pool.query(queryText, queryValues, (error, results) => {
-    if (error) {
-      throw error;
+    if (queryParams.id) {
+      //Return a single podcast by ID
+      queryText = 'SELECT * FROM podcasts WHERE id = $1 ORDER BY datecreated DESC';
+      queryValues = [queryParams.id];
+    }
+    else if (queryParams.startDate) {
+      //Return podcasts between startDate and endDate
+      if (!queryParams.endDate) reject("Error: " + error);
+      queryText = 'SELECT * FROM podcasts WHERE datecreated >= $1 AND datecreated <= $2 ORDER BY datecreated DESC';
+      queryValues = [queryParams.startDate, queryParams.endDate];
+    }
+    else {
+      //Return all podcasts, ordered by date (soonest to oldest)
+      queryText = 'SELECT * FROM podcasts ORDER BY datecreated DESC';
     }
 
-    result = results.rows;
+    pool.query(queryText, queryValues, (error, results) => {
+      if (error) reject("Error: " + error);
+
+      resolve(results.rows);
+    });
   });
 }
 
 //Get contact message
-const getContactMsg = request => {
-  let rb = request.body;
-  
-  //TODO: Add parameters (date range, etc.)
-  let queryText = 'SELECT * from contactmessages';
-  //let queryValues = [rb.datecreated];
-  let result;
+const getContactMsg = queryParams => {
+  return new Promise((resolve, reject) => {
+    let queryText, queryValues;
 
-  pool.query(queryText, queryValues, (error, results) => {
-    if (error) {
-      throw error;
+    if (queryParams.id) {
+      //Return a single podcast by ID
+      queryText = 'SELECT * FROM contactmessages WHERE id = $1 ORDER BY datecreated DESC';
+      queryValues = [queryParams.id];
+    }
+    else if (queryParams.startDate) {
+      //Return podcasts between startDate and endDate
+      if (!queryParams.endDate) reject("Error: " + error);
+      queryText = 'SELECT * FROM contactmessages WHERE datecreated >= $1 AND datecreated <= $2 ORDER BY datecreated DESC';
+      queryValues = [queryParams.startDate, queryParams.endDate];
+    }
+    else {
+      //Return all podcasts, ordered by date (soonest to oldest)
+      queryText = 'SELECT * FROM contactmessages ORDER BY datecreated DESC';
     }
 
-    result = results.rows;
+    pool.query(queryText, queryValues, (error, results) => {
+      if (error) reject("Error: " + error);
+  
+      resolve(results.rows);
+    });
   });
 }
 
