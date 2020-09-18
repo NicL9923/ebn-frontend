@@ -18,10 +18,9 @@ class Blog extends React.Component {
 
   getBlogPosts = () => {
     fetch('/api/blogposts/get', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      method: 'GET'
     })
-    .then(res => res.text())
+    .then(res => res.json())
     .then(body => console.log(body));
   }
 

@@ -1,6 +1,7 @@
 /* queries.js - handles queries to PostgresSQL database */
 require('dotenv').config();
 const Pool = require('pg').Pool;
+const fs = require('fs');
 
 // TODO: For production, move sensitive info to .env file
 const pool = new Pool({
@@ -61,20 +62,40 @@ const createContactMsg = request => {
 }
 
 //Get blog post
-const getBlogPost = request => {
-  let rb = request.body;
-  
-  //TODO: Add parameters (date range, etc.)
-  let queryText = 'SELECT * from blogposts';
-  //let queryValues = [rb.datecreated];
-  let result;
+const getBlogPost = (queryParams, response) => {
+  let queryText;
+  let queryValues;
+
+  if (queryParams.id) {
+    //Return a single post by ID
+    queryText = 'SELECT * FROM blogposts WHERE id = $1 ORDER BY datecreated';
+    queryValues = [queryParams.id];
+  }
+  else if (queryParams.startDate) {
+    //Return posts between startDate and endDate
+    if (!queryParams.endDate) throw error;
+    queryText = 'SELECT * FROM blogposts WHERE datecreated >= $1 AND datecreated <= $2';
+    queryValues = [queryParams.endDate, queryParams.startDate];
+  }
+  else {
+    //Return all posts, ordered by date (soonest to oldest)
+    queryText = 'SELECT * FROM blogposts ORDER BY datecreated';
+  }
 
   pool.query(queryText, queryValues, (error, results) => {
-    if (error) {
-      throw error;
-    }
+    if (error) throw error;
 
-    result = results.rows;
+    //Use pathtobodyfile to actually read text and add property bodyText to send with response
+    results.rows.forEach(row => {
+      fs.readFileSync(row.pathtobodyfile, 'utf-8', (error, data) => {
+        if (error) throw error;
+        row.bodyText = data;
+        //TODO: read the bodyText file into the response (currently getting results, but no bodyText appended...)
+        //Also TODO: evaluate if you really want queries.js here, and if so, need some way to prevent it being accessed and crashing server
+      });
+    });
+
+    response.status(200).json(results.rows);
   });
 }
 
