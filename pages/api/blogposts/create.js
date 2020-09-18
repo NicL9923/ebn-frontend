@@ -1,5 +1,5 @@
 //Create blog post endpoint - /api/blogposts/create
-const db = require('../queries');
+const db = require('../../../components/queries');
 const fs = require('fs');
 
 export default (request, response) => {

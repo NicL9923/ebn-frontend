@@ -7,11 +7,12 @@ class Blog extends React.Component {
   constructor() {
     super();
     this.state = {
-
+      posts: [],
+      mostRecentPost: null,
+      postOfTheMonth: null
     }
   }
   
-  //TODO: figure out how to pass in URL parameters...
   componentDidMount() {
     this.getBlogPosts();
   }
@@ -21,7 +22,14 @@ class Blog extends React.Component {
       method: 'GET'
     })
     .then(res => res.json())
-    .then(body => console.log(body));
+    .then(body => { 
+      this.setState({ posts: body });
+      this.setMostRecentPost();
+    });
+  }
+
+  setMostRecentPost = () => {
+    this.setState({ mostRecentPost: this.state.posts[0], posts: this.state.posts.slice(1) });
   }
 
   render() {
@@ -39,13 +47,24 @@ class Blog extends React.Component {
             <div className="postOfTheMonth">
               <h3>Post of the Month</h3>
   
-              <BlogpostPreview/>
+              {this.state.postOfTheMonth && 
+              <BlogpostPreview
+                postTitle={this.state.postOfTheMonth.title} 
+                postAuthor={this.state.postOfTheMonth.author} 
+                dateCreated={this.state.postOfTheMonth.datecreated} 
+                bodyText={this.state.postOfTheMonth.bodyText}
+              />}
             </div>
   
             <div>
               <h3>Most Recent</h3>
-  
-              <BlogpostPreview/>
+              {this.state.mostRecentPost && 
+              <BlogpostPreview 
+                postTitle={this.state.mostRecentPost.title} 
+                postAuthor={this.state.mostRecentPost.author} 
+                dateCreated={this.state.mostRecentPost.datecreated} 
+                bodyText={this.state.mostRecentPost.bodyText}
+              />}
             </div>
           </div>
   
@@ -55,9 +74,9 @@ class Blog extends React.Component {
             <h3>Latest Posts</h3>
   
             <div>
-              <BlogpostPreview/>
-              <BlogpostPreview/>
-              <BlogpostPreview/>
+              {this.state.posts.map(post => 
+                <BlogpostPreview key={post.id} postTitle={post.title} postAuthor={post.author} dateCreated={post.datecreated} bodyText={post.bodyText}/>
+              )}
             </div>
           </div>
         </main>
