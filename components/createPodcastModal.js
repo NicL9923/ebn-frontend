@@ -13,18 +13,33 @@ class CreatePodcastModal extends React.Component {
     submitPodcast = e => {
         e.preventDefault();
 
-        let formData = new FormData();
-            
-        formData.append('title', this.state.title);
-        formData.append('dateCreated', new Date());
-        formData.append('audioFile', this.fileInput.current.files[0]);
+        let fileReader = new FileReader();
+        let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        fileReader.readAsArrayBuffer(this.fileInput.current.files[0]);
 
-        fetch('/api/podcasts/create', {
-            method: 'POST',
-            body: formData
-        })
-        .then(res => res.text())
-        .then(body => console.log(body));
+        fileReader.onload = event => {
+            audioContext.decodeAudioData(event.target.result, buffer => {
+                let duration = (buffer.duration).toFixed(2);
+                let fileSize = (this.fileInput.current.files[0].size / (1024 * 1024)).toFixed(2);
+
+                let formData = new FormData();
+            
+                formData.append('title', this.state.title);
+                formData.append('dateCreated', new Date());
+                formData.append('audioSize', fileSize);
+                formData.append('audioDuration', duration)
+                formData.append('audioFile', this.fileInput.current.files[0]);
+
+                fetch('/api/podcasts/create', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.text())
+                .then(body => console.log(body));
+            });
+        }
+        
+        
     }
 
     handleInputChange = e => {

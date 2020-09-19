@@ -3,23 +3,35 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faClock, faMusic } from '@fortawesome/free-solid-svg-icons';
 
+//TODO: Download button to download file
+
 class PodcastBlock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: this.props.title,
-      dateCreated: this.props.dateCreated,
+      dateCreated: new Date(this.props.dateCreated).toLocaleString(),
       podcastID: this.props.id,
-      audioDuration: "",
-      audioFileSize: "",
+      audioDuration: this.props.durationInSec,
+      audioFileSize: this.props.sizeInMB,
       autoLoadAudio: this.props.autoLoadAudio
     }
   }
 
   componentDidMount() {
+    this.convertDurationToMinSec();
     if (this.state.autoLoadAudio) {
       this.loadPodcastAudio();
     }
+  }
+
+  convertDurationToMinSec = () => {
+    let durationFloat = parseFloat(this.state.audioDuration);
+    let minutes = Math.floor(durationFloat / 60);
+    let seconds = Math.round(durationFloat % 60);
+
+    let durationString = `${minutes}m ${seconds}s`;
+    this.setState({ audioDuration: durationString });
   }
   
   loadPodcastAudio = () => {

@@ -31,18 +31,14 @@ const createBlogPost = (request, bodyTextPath, headerImagePath = null) => {
 }
 
 //Create podcast
-const createPodcast = (title, dateCreated, audioFilePath) => {
-  let queryText = 'INSERT INTO podcasts VALUES ($1, $2, $3)';
-  let queryValues = [title, new Date(dateCreated), audioFilePath];
-
-  let result;
+const createPodcast = (title, dateCreated, audioFilePath, audioSize, audioDuration) => {
+  let queryText = 'INSERT INTO podcasts(title, datecreated, pathtoaudiofile, audiosize, audioduration) VALUES ($1, $2, $3, $4, $5)';
+  let queryValues = [title, new Date(dateCreated), audioFilePath, audioSize, audioDuration];
 
   pool.query(queryText, queryValues, (error, results) => {
     if (error) {
       throw error;
     }
-
-    result = results.rows;
   });
 }
 
