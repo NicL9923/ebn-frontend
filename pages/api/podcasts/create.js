@@ -15,7 +15,7 @@ export default (request, response) => {
             fs.rename(oldPath, newPath, error => {
                 if (error) response.status(400).end("API - Error creating podcast: " + err);
             });
-
+            //TODO: Get audio file DURATION and SIZE, and store as strings in DB, then pass them to the podcastBlocks on the podcast page component
             db.createPodcast(fields.title, fields.dateCreated, newPath);
             response.status(200).end("API - Successfully created podcast!");
         });

@@ -67,7 +67,7 @@ const getBlogPost = queryParams => {
 
     if (queryParams.id) {
       //Return a single post by ID
-      queryText = 'SELECT * FROM blogposts WHERE id = $1 ORDER BY datecreated DESC';
+      queryText = 'SELECT * FROM blogposts WHERE id = $1';
       queryValues = [queryParams.id];
     }
     else if (queryParams.startDate) {
@@ -96,7 +96,7 @@ const getPodcast = queryParams => {
 
     if (queryParams.id) {
       //Return a single podcast by ID
-      queryText = 'SELECT * FROM podcasts WHERE id = $1 ORDER BY datecreated DESC';
+      queryText = 'SELECT * FROM podcasts WHERE id = $1';
       queryValues = [queryParams.id];
     }
     else if (queryParams.startDate) {
@@ -109,6 +109,22 @@ const getPodcast = queryParams => {
       //Return all podcasts, ordered by date (soonest to oldest)
       queryText = 'SELECT * FROM podcasts ORDER BY datecreated DESC';
     }
+
+    pool.query(queryText, queryValues, (error, results) => {
+      if (error) reject("Error: " + error);
+
+      resolve(results.rows);
+    });
+  });
+}
+
+//Get podcast audio
+const getPodcastAudio = queryParams => {
+  return new Promise((resolve, reject) => {
+    if (!queryParams.id) reject("Error: No ID was passed!");
+
+    let queryText = 'SELECT * FROM podcasts WHERE id = $1';
+    let queryValues = [queryParams.id];
 
     pool.query(queryText, queryValues, (error, results) => {
       if (error) reject("Error: " + error);
@@ -213,6 +229,7 @@ module.exports = {
     createContactMsg,
     getBlogPost,
     getPodcast,
+    getPodcastAudio,
     getContactMsg,
     updateBlogPost,
     deleteBlogPost,

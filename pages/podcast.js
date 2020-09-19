@@ -49,7 +49,7 @@ class Podcast extends React.Component {
               <h3>Our Latest Podcast</h3>
   
               {this.state.latestPodcast && 
-                <PodcastBlock title={this.state.latestPodcast.title} dateCreated={this.state.latestPodcast.datecreated} autoLoadAudio/>
+                <PodcastBlock title={this.state.latestPodcast.title} dateCreated={this.state.latestPodcast.datecreated} id={this.state.latestPodcast.id} autoLoadAudio/>
               }
             </div>
           </div>
@@ -61,7 +61,7 @@ class Podcast extends React.Component {
   
             <div>
               {this.state.podcasts.map(podcast => 
-                <PodcastBlock key={podcast.id} title={podcast.title} dateCreated={podcast.datecreated}/>
+                <PodcastBlock key={podcast.id} title={podcast.title} dateCreated={podcast.datecreated} id={podcast.id}/>
               )}
             </div>
           </div>

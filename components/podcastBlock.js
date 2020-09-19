@@ -9,6 +9,7 @@ class PodcastBlock extends React.Component {
     this.state = {
       title: this.props.title,
       dateCreated: this.props.dateCreated,
+      podcastID: this.props.id,
       audioDuration: "",
       audioFileSize: "",
       autoLoadAudio: this.props.autoLoadAudio
@@ -22,7 +23,6 @@ class PodcastBlock extends React.Component {
   }
   
   loadPodcastAudio = () => {
-    //TODO: Load podcast audio
     this.setState({ autoLoadAudio: true });
   }
 
@@ -45,7 +45,7 @@ class PodcastBlock extends React.Component {
               
               {this.state.autoLoadAudio ?
                 (<audio controls>
-                  <source src="/audiofilesource" type="audio/mpeg"/>
+                  <source src={`/api/podcasts/audio?id=${this.state.podcastID}`} type="audio/mpeg"/>
                   Your browser doesn't support the audio element.
                 </audio>) : 
                 (
