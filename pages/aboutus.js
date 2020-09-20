@@ -7,7 +7,7 @@ class AboutUs extends React.Component {
     return (
       <div className="container">
         <Head>
-          <title>Explorers by Nature</title>
+          <title>EBN | About Us</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
   

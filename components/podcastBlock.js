@@ -42,19 +42,22 @@ class PodcastBlock extends React.Component {
         return(
             <div className="podcast">
               <h4>{this.state.title}</h4>
+
               <div>
-                <FontAwesomeIcon icon={faCalendarAlt} color="black"/>
-                <p>{this.state.dateCreated}</p>
+                <div className="iconDiv">
+                  <FontAwesomeIcon icon={faCalendarAlt} color="black"/>
+                  <p>{this.state.dateCreated}</p>
+                </div>
+                <div className="iconDiv">
+                  <FontAwesomeIcon icon={faClock} color="black"/>
+                  <p>{this.state.audioDuration}</p>
+                </div>
+                <div className="iconDiv">
+                  <FontAwesomeIcon icon={faMusic} color="black"/>
+                  <p>{this.state.audioFileSize} MB</p>
+                </div>
               </div>
-              <div>
-                <FontAwesomeIcon icon={faClock} color="black"/>
-                <p>{this.state.audioDuration}</p>
-              </div>
-              <div>
-                <FontAwesomeIcon icon={faMusic} color="black"/>
-                <p>{this.state.audioFileSize} MB</p>
-              </div>
-              
+
               {this.state.autoLoadAudio ?
                 (<audio controls>
                   <source src={`/api/podcasts/audio?id=${this.state.podcastID}`} type="audio/mpeg"/>
@@ -67,9 +70,20 @@ class PodcastBlock extends React.Component {
 
               <style jsx>{`
                 .podcast {
-                  
+                  text-align: left;
                 }
-                `}</style>
+
+                .iconDiv {
+                  display: flex;
+                  flex-direction: row;
+                  margin: 12px 0;
+                  align-items: center;
+                }
+
+                .iconDiv p {
+                  margin-left: 5px;
+                }
+              `}</style>
             </div>
         );
     }

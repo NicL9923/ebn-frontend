@@ -7,7 +7,7 @@ class Store extends React.Component {
     return (
       <div className="container">
         <Head>
-          <title>Explorers by Nature</title>
+          <title>EBN | Store</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
   

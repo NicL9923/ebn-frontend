@@ -36,7 +36,7 @@ class Blog extends React.Component {
     return (
       <div className="container">
         <Head>
-          <title>Explorers by Nature</title>
+          <title>EBN | Blog</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
   
@@ -84,10 +84,16 @@ class Blog extends React.Component {
         <Footer/>
   
         <style jsx>{`
+          .container {
+            height: 100vh;
+          }
+          
           .topPostBar {
             display: grid;
             grid-template-columns: auto auto;
+            column-gap: 20px;
             margin: 30px 0;
+            height: 25vh;
           }
   
           .postOfTheMonth {
@@ -96,7 +102,8 @@ class Blog extends React.Component {
   
           .latestPostsDiv {
             text-align: center;
-            margin: 30px 0;
+            margin: 30px auto;
+            width: 60%;
           }
         `}</style>
   

@@ -24,7 +24,7 @@ class Admin extends React.Component {
     return (
       <div className="container">
         <Head>
-          <title>Explorers by Nature</title>
+          <title>EBN | Admin Portal</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
   

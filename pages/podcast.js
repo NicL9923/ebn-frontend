@@ -35,7 +35,7 @@ class Podcast extends React.Component {
     return (
       <div className="container">
         <Head>
-          <title>Explorers by Nature</title>
+          <title>EBN | Podcast</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
   
@@ -77,19 +77,33 @@ class Podcast extends React.Component {
         <Footer/>
   
         <style jsx>{`
+          .container {
+            height: 100vh;
+            max-height: 100vh;
+          }
+          
           .latestPodcastContainer {
             display: grid;
             grid-template-columns: auto auto;
             column-gap: 20px;
             margin: 30px 0;
+            height: 25vh;
           }
   
           .podcastLogoBox {
             border-right: 3px solid #212121;
+            text-align: center;
+          }
+
+          .podcastLogoBox img {
+            height: 100%;
           }
   
           .prevPodcastsContainer {
             text-align: center;
+            overflow: auto;
+            width: 60%;
+            margin: 10px auto;
           }
         `}</style>
   
